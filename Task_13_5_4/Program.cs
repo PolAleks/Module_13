@@ -9,24 +9,28 @@
             Console.WriteLine("Введите слово и нажмите Enter, чтобы добавить его в стек.");
             Console.WriteLine();
 
-            string message = String.Empty;
+            string? message = String.Empty;
             while (true)
             {
                 var input = Console.ReadLine();
 
                 if (String.IsNullOrEmpty(input))
                     continue;
-                else if (input == "pop")
+                
+                switch(input)
                 {
-                    words.TryPop(out message);
-                    Console.WriteLine($"Удален элемент *{message}* из стека");
+                    case "pop":
+                        words.TryPop(out message);
+                        Console.WriteLine($"Удален элемент *{message}* из стека");
+                        break;
+                    case "peek":
+                        words.TryPeek(out message);
+                        Console.WriteLine($"Первый элемент в стеке: {message}");
+                        break;
+                    default:
+                        words.Push(input);
+                        break;
                 }
-                else if (input == "peek")
-                {
-                    words.TryPeek(out message);
-                    Console.WriteLine($"Первый элемент в стеке: {message}");
-                }else           
-                    words.Push(input); 
 
                 Console.WriteLine("В стеке:");
 
